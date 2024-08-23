@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Iwo Grzes</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block importmap %}
+            {{ importmap('app') }}
+        {% endblock %}
+
+        {% block css %}
+        {% endblock %}
+    </head>
+    <body>
+    <div class="background" id="background">
+    </div>
+    <div class="overlay">
+        <div class="overlay__bar overlay__bar--top"></div>
+        <div class="overlay__bar overlay__bar--bottom"></div>
+    </div>
+    <div class="frame">
+        <div class="frame__line frame__line--top"></div>
+        <div class="frame__line frame__line--right"></div>
+        <div class="frame__line frame__line--bottom"></div>
+        <div class="frame__line frame__line--left"></div>
+    </div>
+        {{ include('components/navbar.html.twig')}}
+    <main class="content">
+        <div class="content__inner_wrapper" id="scrollableContent">
+            {% block body %}{% endblock %}
+        </div>
+    </main>
+    <script id="vertexShader" type="x-shader/x-vertex">
+        varying vec2 vUvs;
+
+      void main() {
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          vUvs = uv;
+      }
+    </script>
+
+    <script id="fragmentShaderScreen" type="x-shader/x-fragment">
+
+        precision mediump float;
+      //Our input texture
+      uniform sampler2D uTexture;
+        varying vec2 vUvs;
+
+      void main() {
+          //special method to sample from texture
+          vec4 initTexture = texture2D(uTexture, vUvs);
+
+          vec3 colour = initTexture.rgb;
+
+          gl_FragColor = vec4(colour, 1.0);
+
+      }
+    </script>
+
+    <script id="fragmentShaderBuffer" type="x-shader/x-fragment">
+
+        precision mediump float;
+        //Our input texture
+        uniform sampler2D uTexture;
+        uniform vec2 uResolution;
+
+        varying vec2 vUvs;
+
+        float GetNeighbours(vec2 p) {
+          float count = 0.0;
+
+          for(float y = -1.0; y <= 1.0; y++) {
+              for(float x = -1.0; x <= 1.0; x++) {
+
+                  if(x == 0.0 && y == 0.0)
+                      continue;
+
+                  // Scale the offset down
+                  vec2 offset = vec2(x, y) / uResolution.xy;
+                  // Apply offset and sample texture
+                  vec4 lookup = texture2D(uTexture, p + offset);
+                   // Accumulate the result
+                  count += lookup.r > 0.5 ? 1.0 : 0.0;
+              }
+          }
+
+          return count;
+      }
+
+
+
+      void main() {
+          /*
+              Using a tempoary variable for the output value for clarity.
+              it is just passed to fragColor at the end of the function.
+          */
+          vec3 color = vec3(0.0);
+
+        /*
+              Time to count the population of the neighborhood!
+              We count all the live cells in a 3 wide, 3 tall area
+              centered on this cell.
+               _ _ _
+              |_|_|_|     [-1, -1], [0, -1], [1, -1],
+              |_|_|_|  =  [-1,  0], [0,  0], [1,  0],
+              |_|_|_|     [-1,  1], [0,  1], [1,  1],
+
+              Since each cell only should hold a value of either 0 (dead) or 1 (alive),
+              the count yields an integer value, but since the
+              texture sampling returns a float, we will use that instead.
+          */
+        float neighbors = 0.0;
+
+
+              neighbors += GetNeighbours(vUvs);
+
+              bool alive = texture2D(uTexture, vUvs).x > 0.5;
+
+              if(alive && (neighbors == 2.0 || neighbors == 3.0)) { //cell is alive
+
+
+                    //Any live cell with two or three live       neighbours lives on to the next generation.
+                  color = vec3(1.0, 0.0, .7);
+
+              //cell is dead
+              } else if(!alive && (neighbors == 3.0)) {
+              //Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+                  color = vec3(1.0, 0.5, 0);
+
+              }
+
+          gl_FragColor = vec4(color, 1.0);
+
+      }
+    </script>
+    <script type="module" src="{{ asset('scripts/three.js') }}"></script>
+    <script lang="js" src="{{ asset('scripts/scrollableContent.js') }}"></script>
+    {% block js %}
+    {% endblock %}
+    </body>
+</html>
