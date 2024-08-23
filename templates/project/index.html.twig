@@ -1,7 +1,18 @@
 {% extends 'base.html.twig' %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('styles/projects.css') }}"/>
+{% endblock %}
+
 {% block body %}
-<section class="page">
-    hello
-</section>
+    <section class="page projects">
+        <div class="page__content">
+            <div class="project__list">
+                <a class="project__link" href="https://github.com/yelloweq/HighBid">
+                    <div class="link__title">HighBid</div>
+                    <div class="link__description">2024 / University</div>
+                </a>
+            </div>
+        </div>
+    </section>
 {% endblock %}

@@ -1,0 +1,31 @@
+.projects {
+    .project__list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        row-gap: 30px;
+    }
+    .project__link {
+        display: flex;
+        text-decoration: none;
+        color: inherit;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+        align-items: baseline;
+        column-gap: 15px;
+        transition-property: opacity;
+        transition-duration: .4s;
+        transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
+
+        .link__title {
+            font-weight: 200;
+            font-size: 60px;
+            text-align: right;
+        }
+    }
+
+    .project__link:hover {
+        opacity: 0.7;
+        cursor: pointer;
+    }
+}

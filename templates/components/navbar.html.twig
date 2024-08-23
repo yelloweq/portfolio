@@ -5,19 +5,38 @@
     <nav class="navbar">
         <ol class="navbar__list">
             <li class="navbar__listItem">
-                <a class="navbar__link" href="{{ url('home') }}">Home</a>
+                <a class="navbar__link
+                    {% if app.current_route == 'home'  %} navbar__link--active {% endif %}"
+                    href="{{ url('home') }}">Home
+                </a>
             </li>
             <li class="navbar__listItem">
-                <a class="navbar__link" href="{{ url('experience') }}">Experience</a>
+                <a class="navbar__link
+                    {% if app.current_route == 'experience'  %} navbar__link--active {% endif %}"
+                    href="{{ url('experience') }}">
+                    Experience
+                </a>
             </li>
             <li class="navbar__listItem">
-                <a class="navbar__link" href="{{ url('projects') }}">Projects</a>
+                <a class="navbar__link
+                    {% if app.current_route == 'projects'  %} navbar__link--active {% endif %}"
+                    href="{{ url('projects') }}">
+                    Projects
+                </a>
             </li>
             <li class="navbar__listItem">
-                <a class="navbar__link" href="{{ url('cv') }}">CV</a>
+                <a class="navbar__link
+                    {% if app.current_route == 'cv'  %} navbar__link--active {% endif %}"
+                    href="{{ url('cv') }}">
+                    CV
+                </a>
             </li>
             <li class="navbar__listItem">
-                <a class="navbar__link" href="{{ url('contact') }}">Contact</a>
+                <a class="navbar__link
+                    {% if app.current_route == 'contact'  %} navbar__link--active {% endif %}"
+                   href="{{ url('contact') }}">
+                    Contact
+                </a>
             </li>
         </ol>
     </nav>
