@@ -1,8 +1,12 @@
 .home {
-    li {
-        font-size: 30px;
-        text-wrap: nowrap;
+    .about_me{
+        position: absolute;
+        bottom: calc(var(--pad)*2);
+        right: calc(var(--pad)*2);
+        max-width: 200px;
 
+
+        p { text-wrap: wrap; text-align: left; }
     }
 }
 
