@@ -1,9 +1,51 @@
 {% extends 'base.html.twig' %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('styles/experience.css') }}"/>
+{% endblock %}
+
 {% block body %}
     <section class="page experience">
         <div class="page__content">
-            Work in progress
+            <div class="page__inner_wrapper">
+                <div class="experience__block">
+                    <div class="experience__header">
+                        <div class="header__company">Tutorful</div>
+                        <div class="header__date">08/2022 - 08/2023</div>
+                    </div>
+                    <ul class="experience__list">
+                        <li class="experience__listItem">Created user interfaces based on the provided UX visualisations</li>
+                        <li class="experience__listItem">
+                            Conducted both automated and manual testing in a staging
+                            environment to ensure feature readiness before release.
+                        </li>
+                        <li class="experience__listItem">Migrated legacy API endpoints to new repositories, improving system
+                            efficiency.</li>
+                        <li class="experience__listItem">Built and deployed new features for both web and mobile platforms
+                            using Jira and agile methodology.</li>
+                        <li class="experience__listItem">Maintained high code quality and organisation through adherence to
+                            best practices and conducting code reviews.</li>
+                        <li class="experience__listItem">Optimised application performance by identifying and resolving
+                            bottlenecks in code and database queries.</li>
+                    </ul>
+                </div>
+
+
+                <div class="experience__block">
+                    <div class="experience__header">
+                        <div class="header__company">Other company</div>
+                        <div class="header__date">08/2022 - 08/2023</div>
+                    </div>
+                    <ul class="experience__list">
+                        <li class="experience__listItem">Built and deployed new features for both web and mobile platforms
+                            using Jira and agile methodology.</li>
+                        <li class="experience__listItem">Maintained high code quality and organisation through adherence to
+                            best practices and conducting code reviews.</li>
+                        <li class="experience__listItem">Optimised application performance by identifying and resolving
+                            bottlenecks in code and database queries.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 {% endblock %}
