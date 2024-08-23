@@ -147,6 +147,14 @@ body {
     transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
 }
 
+.navbar__link--active {
+    background-color: transparent;
+
+}
+.navbar__link--active::after {
+    content: '╳';
+}
+
 main {
     display: block;
 }
