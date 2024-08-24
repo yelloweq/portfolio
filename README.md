@@ -13,11 +13,14 @@ Developed using Symfony Docker image
 5. Run `docker compose down --remove-orphans` to stop the Docker containers.
 
 ## TODO:
-* Add intro statement to homepage
+* Add intro statement to homepage -- current
 * Create custom texture / threejs scene to use as background
 * Add a contact form using mailer
 * Add animations to minor components
 * Add an intro animation when first visiting the site
 * (idea) Project preview in the middle of the screen on link hover
 * (idea) Add scrolling work experience with threejs components to create a visual story
-
+* (idea) Change to SPA to remove page refresh, and have seemless animation for page swapping
+        -- (HTMX? WebCore bundle? maybe can be done with assetmapper)
+* Initial loading screen for first time site visit
+* Permanent transition between each page
