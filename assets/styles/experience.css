@@ -30,4 +30,9 @@
     .experience__list {
         text-align: left;
     }
+
+    .experience__listItem {
+        margin-top: 1rem;
+        font-weight: 400;
+    }
 }
