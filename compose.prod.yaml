@@ -1,6 +1,17 @@
 # Production environment override
 services:
+  watchtower:
+    image: containrrr/watchtower
+    command:
+      - "--label-enable"
+      - "--interval"
+      - "30"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   php:
+    image: ghcr.io/yelloweq/portfolio:prod
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     build:
       context: .
       target: frankenphp_prod
