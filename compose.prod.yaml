@@ -7,11 +7,14 @@ services:
       - "--interval"
       - "30"
       - "--rolling-restart"
+      - "--cleanup"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
   php:
-    image: yelloweq/portfolio:prod
+    image: ghcr.io/yelloweq/portfolio:prod
     environment:
       APP_SECRET: ${APP_SECRET}
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
