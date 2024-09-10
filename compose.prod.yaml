@@ -10,6 +10,7 @@ services:
       - "--cleanup"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ${HOME}/.docker/config.json:/config.json
   php:
     image: ghcr.io/yelloweq/portfolio:prod
     environment:
