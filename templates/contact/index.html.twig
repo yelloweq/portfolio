@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ asset('styles/contact.css') }}"/>
+{% endblock %}
+
+{% block body %}
+    <section class="page contact">
+        <div class="page__content">
+            <div class="contact__wrapper">
+                <div class="contact__block">
+                    <div class="contact__message">
+                        <p>Send me an email or give me a call!</p>
+                    </div>
+                    <div class="contact__details">
+                        <div class="details__email">
+                            <a href="mailto:iwo.grzes237@gmail.com" target="_blank">
+                                <span class="email__text_normal">iwo.grzes237@gmail.com</span>
+                                <span class="email__text_small">Email</span>
+                            </a>
+                        </div>
+
+                        <div class="details__phone">
+                            <span class="with-divider">(+44) 743 6459 671</span><span>(+48) 729 218 994</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -191,6 +191,7 @@ main {
     text-align: right;
 }
 
+
 @media (max-width: 42.5rem) {
     .header {
         .header__title {
