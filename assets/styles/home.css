@@ -5,8 +5,10 @@
         right: calc(var(--pad)*2);
         max-width: 12.5rem;
 
-
-        p { text-wrap: wrap; text-align: left; }
+        p {
+            text-wrap: wrap;
+            text-align: left;
+        }
     }
 }
 
