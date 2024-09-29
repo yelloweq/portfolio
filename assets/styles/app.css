@@ -14,7 +14,7 @@ ol, ul {
 }
 
 body {
-    font: normal 600 13px Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: normal 600 1rem Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: var(--bg-primary);
     color: var(--text-primary);
 
@@ -83,11 +83,11 @@ body {
 
 .frame__line--top,  .frame__line--bottom {
     width: 100%;
-    height: 1px;
+    height: 0.0625rem;
 }
 
 .frame__line--left,  .frame__line--right {
-    width: 1px;
+    width: 0.0625rem;
     height: 100%;
 }
 
@@ -112,22 +112,24 @@ body {
 .header__title {
     margin: -0.2em 0 0 -0.1em;
     font-weight: 200;
-    font-size: 60px;
+    font-size: 3.75rem;
+
 }
 
 .header__subtitle {
     font-weight: 400;
     margin-top: -0.25em;
+    font-size: 1rem;
 }
 
 .navbar {
- margin-top: 50px;
+    margin-top: 3.125rem;
 }
 
 .navbar__list {
     display: flex;
     flex-direction: column;
-    row-gap: 15px;
+    row-gap: 1rem;
 }
 
 .navbar__listItem {
@@ -185,8 +187,44 @@ main {
 }
 
 .page__content {
-    padding: calc(var(--pad)*2 + 115px) calc(var(--pad)*2);
+    padding: calc(var(--pad)*2 + 7.1875rem) calc(var(--pad)*2);
     text-align: right;
+    transition-property: transform;
+    transition-duration: 1s;
+    transition-timing-function: cubic-bezier(0.1, 0.4, 0.2, 1);
+}
+
+
+@media (max-width: 42.5rem) {
+    .header {
+        .header__title {
+            font-size: 3rem;
+        }
+        .header__subtitle {
+            font-size: 0.9rem;
+        }
+    }
+}
+
+@media (max-width: 24.375rem) {
+    .header {
+        top: calc(var(--pad)*1.5);
+        left: calc(var(--pad)*1.1);
+
+        .header__title {
+            font-size: 2.5rem;
+        }
+        .header__subtitle {
+            font-size: 0.7rem;
+        }
+    }
+    .frame {
+        left: calc(var(--pad)*0.7);
+        right: calc(var(--pad)*0.7);
+    }
+    .navbar__listItem {
+        font-size: 0.7rem;
+    }
 }
 
 :root {
@@ -194,7 +232,7 @@ main {
     --bg-primary: hsl(0, 0%, 95%);
     --text-primary: black;
     --text-hover: lightgray;
-    --pad: max(20px, 4vmin);
+    --pad: max(1.25rem, 4vmin);
 }
 
 [data-theme="dark"] {

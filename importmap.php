@@ -16,7 +16,19 @@ return [
         'path' => './assets/app.js',
         'entrypoint' => true,
     ],
+    '@symfony/stimulus-bundle' => [
+        'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
+    ],
+    '@hotwired/stimulus' => [
+        'version' => '3.2.2',
+    ],
+    '@hotwired/turbo' => [
+        'version' => '8.0.10',
+    ],
     'three' => [
-        'version' => '0.167.1',
+        'version' => '0.168.0',
+    ],
+    'dat.gui' => [
+        'version' => '0.7.9',
     ],
 ];

@@ -6,4 +6,6 @@ return [
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
     Kocal\BiomeJsBundle\KocalBiomeJsBundle::class => ['dev' => true],
+    Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
+    Symfony\UX\Turbo\TurboBundle::class => ['all' => true],
 ];
