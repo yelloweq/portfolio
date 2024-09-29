@@ -9,129 +9,52 @@
 .contact__block {
     max-width: fit-content;
 }
-.contact__message {
-    font-size: 2rem;
-    font-weight: 400;
+.details__email {
+    margin-bottom: 1rem;
 }
-.details__email a .email__text_small {
-    display: none;
+.details__email  a {
+    text-decoration: none;
+    color: white;
 }
+
 .contact__details {
     text-align: left;
     max-width: 400px;
 }
 
+.details__phone {
+    user-select: text;
+}
+
 .details__email, .details__phone {
     font-size: 1.5rem;
-}
-.details__email:before, .details__phone:before {
-    content: "↳";
-    font-size: 3rem;
-}
-
-.with-divider:after {
-        content: " | ";
-        position: relative;
-        color: white;
-        margin-left: 10px;
-        margin-right: 10px;
-}
-
-@media (max-width: 62.5rem) {
-    .contact__message {
-        font-size: 1.5rem;
-        font-weight: 400;
-    }
-
-    .details__email, .details__phone {
-        font-size: 1rem;
-    }
-
-    .details__email:before, .details__phone:before {
-        content: "↳";
-        font-size: 2rem;
-    }
+    font-weight: 400;
 }
 
 @media (max-width: 42.5rem) {
-    .contact__block {
-        text-align: center;
-        max-width: 220px;
+    .page__content {
+        padding: calc(var(--pad)*10 + 7.1875rem) calc(var(--pad)*2);
     }
-
-    .contact__message {
-        font-size: 1.2rem;
-        font-weight: 400;
-        text-wrap: wrap;
+    .contact__wrapper {
+        align-items: start;
     }
-
-    .contact__details {
-        font-size: 0.9rem;
-        text-wrap: wrap;
-        margin-top: 1rem;
-    }
-
     .details__email, .details__phone {
-        font-size: 0.9rem;
-    }
-
-    .details__phone span:nth-child(2) {
-        display: block;
-        margin-left: 1.4rem;
-    }
-
-    .with-divider:after {
-        display: none;
+        font-size: 1.25rem;
     }
 }
 
 @media (max-width: 24.375rem) {
     .contact__block {
-        max-width: 150px;
-        min-width: 150px;
-        text-align: center;
-        margin-top: -1.5rem;
+        border: 1px white solid;
+        border-radius: 0 0.5rem 0.5rem 0;
+        border-left: none;
+        padding: 0.5rem;
+    }
+    .page__content {
+        padding: calc(var(--pad)*8 + 7.1875rem) calc(var(--pad) - 0.375rem);
     }
 
-    .contact__message {
-        font-size: 1rem;
-        font-weight: 400;
-        text-wrap: wrap;
-    }
-
-    .contact__details {
-        font-size: 0.8rem;
-        text-wrap: wrap;
-        margin-top: 1rem;
-        text-align: center;
-    }
-
-    .details__email {
-        margin-bottom: 1rem;
-    }
-
-    .details__email a .email__text_small {
-        display: inline-block;
-    }
-
-    .details__email a .email__text_normal {
-        display: none;
-    }
-
-    .details__phone span{
-        display: block;
-        margin-bottom: 0.5rem;
-    }
-
-    .details__phone span:nth-child(2) {
-        margin-left: 0;
-    }
-
-    .details__email:before, .details__phone:before {
-        display: none;
-    }
-
-    .with-divider:after {
-        display: none;
+    .details__email, .details__phone {
+        font-size: .8rem;
     }
 }
