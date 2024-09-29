@@ -2,6 +2,8 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Iwo Grzes</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block importmap %}
@@ -12,8 +14,7 @@
         {% endblock %}
     </head>
     <body>
-    <div class="background" id="background">
-    </div>
+    <div class="background" id="background" data-controller="three"></div>
     <div class="overlay">
         <div class="overlay__bar overlay__bar--top"></div>
         <div class="overlay__bar overlay__bar--bottom"></div>
@@ -24,15 +25,94 @@
         <div class="frame__line frame__line--bottom"></div>
         <div class="frame__line frame__line--left"></div>
     </div>
+    <div class="transitions" id="transitions"></div>
         {{ include('components/navbar.html.twig')}}
+    {% block html_transitions %}{% endblock %}
     <main class="content">
         <div class="content__inner_wrapper" id="scrollableContent">
             {% block body %}{% endblock %}
         </div>
     </main>
 
-    <script lang="js" src="{{ asset('scripts/scrollableContent.js') }}"></script>
     {% block js %}
     {% endblock %}
+    <script id="vertexShader" type="x-shader/x-vertex">
+        varying vec2 vUv;
+        varying vec3 vNormal;
+        varying vec3 vPosition;
+
+        void main() {
+            vUv = uv;
+            vNormal = normal;
+            vPosition = position;
+
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1);
+        }
+    </script>
+    <script id="fragmentShader" type="x-shader/x-fragment">
+        varying vec2 vUv;
+        varying vec3 vNormal;
+
+        uniform float uTime;
+
+        // Simplex 2D noise
+        //
+        vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+
+        float snoise(vec2 v){
+          const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+                   -0.577350269189626, 0.024390243902439);
+          vec2 i  = floor(v + dot(v, C.yy) );
+          vec2 x0 = v -   i + dot(i, C.xx);
+          vec2 i1;
+          i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+          vec4 x12 = x0.xyxy + C.xxzz;
+          x12.xy -= i1;
+          i = mod(i, 289.0);
+          vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
+          + i.x + vec3(0.0, i1.x, 1.0 ));
+          vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy),
+            dot(x12.zw,x12.zw)), 0.0);
+          m = m*m ;
+          m = m*m ;
+          vec3 x = 2.0 * fract(p * C.www) - 1.0;
+          vec3 h = abs(x) - 0.5;
+          vec3 ox = floor(x + 0.5);
+          vec3 a0 = x - ox;
+          m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
+          vec3 g;
+          g.x  = a0.x  * x0.x  + h.x  * x0.y;
+          g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+          return 130.0 * dot(m, g);
+        }
+
+        void main() {
+            vec2 uv = vUv;
+            float texNoise = snoise(vUv);
+            float time = uTime / 5.;
+
+            for (float i = 1.; i < 30.; i++) {
+                uv.x -= 0.6 / i * cos(i * 2.5 * uv.y + time);
+                uv.y -= 0.6 / i * cos(i * 1.5 * uv.x + time);
+            }
+
+            vec3 wave = vec3(snoise(vec2(abs(sin(time-uv.y+uv.x)))));
+            float mynoise = snoise(cos(vec2(uv.x-time, uv.y-time)));
+
+            //temp
+            vec3 colorA = vec3(1.0, 0.55, 0.0);
+            vec3 colorB = vec3(0.226,0.000,0.615);
+
+            vec3 gradient = mix(colorA, colorB, uv.x);
+
+            vec3 color = vec3(mynoise);
+            color = smoothstep(.25, 1., color);
+            color *= gradient;
+
+            //desaturate
+            //color *= vec3(0.5, 0.5, 0.5);
+            gl_FragColor = vec4(color, 1.);
+        }
+    </script>
     </body>
 </html>

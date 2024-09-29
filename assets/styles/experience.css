@@ -14,7 +14,7 @@
     }
 
     .experience__block {
-        max-width: 350px;
+        max-width: 21.875rem;
         text-wrap: wrap;
     }
     .experience__header {
@@ -22,9 +22,13 @@
         justify-content: flex-start;
         align-items: baseline;
         flex-direction: row-reverse;
+
+        .header__date {
+            min-width: fit-content;
+        }
     }
     .header__company {
-        font-size: 60px;
+        font-size: 3.75rem;
         font-weight: 200;
     }
     .experience__list {
@@ -32,7 +36,42 @@
     }
 
     .experience__listItem {
-        margin-top: 1rem;
+        padding-top: 1rem;
         font-weight: 400;
+    }
+}
+
+@media (max-width: 42.5rem) {
+    .experience {
+        .page__inner_wrapper {
+            left: 35vw;
+        }
+        .experience__block {
+            margin-bottom: 2rem;
+        }
+        .experience__header {
+            flex-direction: column;
+            .header__company {
+                font-size: 3rem;
+            }
+        }
+        .experience__listItem {
+            font-size: 0.8rem;
+            min-width: 11.25rem;
+        }
+    }
+}
+
+@media (max-width: 24.375rem) {
+    .experience {
+        .page__inner_wrapper {
+            left: 25vw;
+        }
+        .experience__header {
+            flex-direction: column;
+            .header__date {
+                font-size: 0.7rem;
+            }
+        }
     }
 }
